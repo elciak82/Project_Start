@@ -1,32 +1,35 @@
 package tests_selenium;
 
-import helpers.Configuration;
 import org.junit.*;
 import org.openqa.selenium.WebDriver;
+import pages.HeaderPage;
+import pages.MyAccountPage;
 
-import static helpers.Configuration.getConfiguration;
-import static helpers.Driver.initializeWebDriver;
+import static helpers.Driver.*;
+import static helpers.Configuration.*;
 
 public class CartTests {
     private WebDriver driver;
-    public Configuration configuration;
-
-    private final String login = configuration.getLogin();
-    private final String password = configuration.getPassword();
+    private MyAccountPage loginPage;
+    private HeaderPage headerPage;
+    private String login;
+    private String password;
 
     @Before
     public void setUp() throws InterruptedException {
         driver = initializeWebDriver();
         driver.get(getConfiguration().getSiteURL());
-//        this.loginPage = new LoginPage(driver);
-//        loginPage.loginToPage(login, password);
+        loginPage = new MyAccountPage(driver);
+        headerPage = new HeaderPage(driver);
+        login = getConfiguration().getLogin();
+        password = getConfiguration().getPassword();
     }
 
     @Test
     public void firstTest() {
-        System.out.println("firstTest");
+        System.out.println(login);
+        headerPage.logIn(login, password);
     }
-
 
     @After
     public void tearDown() {

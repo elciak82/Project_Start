@@ -12,10 +12,10 @@ public class Configuration {
     private Properties properties;
     private String siteURL;
     private String driverLocation;
-    private String login;
-    private String password;
+    public String login;
+    public String password;
 
-    public Configuration() {
+    private Configuration() {
         try {
             properties = new Properties();
             properties.load(Configuration.class.getClassLoader().getResourceAsStream("configuration.properties"));
