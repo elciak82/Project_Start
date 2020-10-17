@@ -13,33 +13,13 @@ public class HeaderPage extends GenericPage{
     @FindBy (className = "login")
     WebElement loginButton;
 
-    @FindBy (id = "SubmitLogin")
-    WebElement submitLogin;
-
-    @FindBy (id = "email")
-    WebElement email;
-
-    @FindBy (id = "passwd")
-    WebElement passwd;
-
-//    public LoginPage openCartPage(){
-//        GenericPage genericPage = new GenericPage(driver);
-//        genericPage.fluentWaitForElementDisplayed(cartIcon);
-//        cartIcon.click();
-//        return new LoginPage(driver);
-//    }
-
-    public MyAccountPage logIn(String login, String password) {
-        GenericPage genericPage = new GenericPage(driver);
-        genericPage.fluentWaitForElementDisplayed(loginButton);
+    public AuthenticationPage clickLoginButton(){
         loginButton.click();
-        email.click();
-        email.sendKeys(login);
-        passwd.click();
-        passwd.sendKeys(password);
-        submitLogin.click();
+        return new AuthenticationPage(driver);
+    }
+
+    public MyAccountPage userSingIn(String email, String password) {
+        clickLoginButton().signIn(email, password);
         return new MyAccountPage(driver);
-
-
     }
 }
