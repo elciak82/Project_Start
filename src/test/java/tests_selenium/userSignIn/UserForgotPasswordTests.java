@@ -28,7 +28,7 @@ public class UserForgotPasswordTests {
     }
 
     @Test
-    public void forgotPasswordSendEmail() {
+    public void forgotPasswordSendEmailTest() {
         headerPage.clickLoginButton()
                 .clickForgotPassword()
                 .sendEmailToChangePassword(email);
@@ -36,7 +36,7 @@ public class UserForgotPasswordTests {
     }
 
     @Test
-    public void forgotPasswordIncorrectEmail() {
+    public void forgotPasswordIncorrectEmailTest() {
         headerPage.clickLoginButton()
                 .clickForgotPassword()
                 .sendEmailToChangePassword("incorrectEmail");
@@ -44,7 +44,7 @@ public class UserForgotPasswordTests {
     }
 
     @Test
-    public void forgotPasswordNoAccount() {
+    public void forgotPasswordNoAccountTest() {
         headerPage.clickLoginButton()
                 .clickForgotPassword()
                 .sendEmailToChangePassword("noAccount@email.pl");

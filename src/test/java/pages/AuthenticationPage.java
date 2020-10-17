@@ -26,11 +26,17 @@ public class AuthenticationPage extends GenericPage{
     @FindBy (id = "passwd")
     WebElement passwdField;
 
+    @FindBy (id = "email_create")
+    WebElement emailCreateAccount;
+
     @FindBy (css = "[class = 'alert alert-danger'] li")
     WebElement errorMsg;
 
     @FindBy (css = "[title='Recover your forgotten password']")
     WebElement forgotPassword;
+
+    @FindBy (id = "SubmitCreate")
+    WebElement createAnAccountButton;
 
     private void setEmail(String email) { //już jest
         emailField.click();
@@ -42,6 +48,11 @@ public class AuthenticationPage extends GenericPage{
         passwdField.sendKeys(password);
     }
 
+    private void setEmailCreateAccount(String email) { //już jest
+        emailCreateAccount.click();
+        emailCreateAccount.sendKeys(email);
+    }
+
     private String getErrorMsg() {
         return errorMsg.getText();
     }
@@ -50,17 +61,29 @@ public class AuthenticationPage extends GenericPage{
         signInButton.click();
     }
 
+    private void clickAnAccountButton(){
+        createAnAccountButton.click();
+    }
+
     public ForgotPasswordPage clickForgotPassword(){
         forgotPassword.click();
         return new ForgotPasswordPage (driver);
     }
 
-    public void signIn(String email, String password) {
-        GenericPage genericPage = new GenericPage(driver);
-        genericPage.fluentWaitForElementDisplayed(signInButton);
+    public MyAccountPage signIn(String email, String password) {
+        fluentWaitForElementDisplayed(signInButton);
         setEmail(email);
         setPasswdField(password);
         clickSignInButton();
+        return new MyAccountPage(driver);
+    }
+
+    public CreateAnAccountPage createAnAccount() {
+        fluentWaitForElementDisplayed(createAnAccountButton);
+        String newEmail= generateRandomEmail();
+        setEmailCreateAccount(newEmail);
+        clickAnAccountButton();
+        return new CreateAnAccountPage(driver);
     }
 
     public Boolean checkErrorMsgInvalidPassword () {

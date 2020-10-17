@@ -29,41 +29,41 @@ public class UserSignInTests {
     }
 
     @Test
-    public void correctSignIn() {
+    public void correctSignInTest() {
         headerPage.userSingIn(email, password);
         Assert.assertTrue(myAccountPage.myAccountIsVisible());
     }
 
     @Test
-    public void tooShortPassword() {
+    public void tooShortPasswordTest() {
         String tooShortPassword = "pass";
         headerPage.userSingIn(email, tooShortPassword);
         Assert.assertTrue(authenticationPage.checkErrorMsgInvalidPassword());
     }
 
     @Test
-    public void incorrectPassword() {
+    public void incorrectPasswordTest() {
         String incorrectPassword = "incorrectPassword";
         headerPage.userSingIn(email, incorrectPassword);
         Assert.assertTrue(authenticationPage.checkErrorMsgInvalidAuthFailed());
     }
 
     @Test
-    public void incorrectLogin() {
+    public void incorrectLoginTest() {
         String incorrectLogin = "incorrectLogin";
         headerPage.userSingIn(incorrectLogin, password);
         Assert.assertTrue(authenticationPage.checkErrorMsgInvalidEmailAddress());
     }
 
     @Test
-    public void requiredPassword() {
+    public void requiredPasswordTest() {
         String requiredPassword = "";
         headerPage.userSingIn(email, requiredPassword);
         Assert.assertTrue(authenticationPage.checkErrorMsgRequiredPassword());
     }
 
     @Test
-    public void requiredLogin() {
+    public void requiredLoginTest() {
         String requiredLogin = "";
         headerPage.userSingIn(requiredLogin, password);
         Assert.assertTrue(authenticationPage.checkErrorMsgInvalidRequiredEmail());

@@ -18,8 +18,7 @@ public class HeaderPage extends GenericPage{
         return new AuthenticationPage(driver);
     }
 
-    public MyAccountPage userSingIn(String email, String password) {
+    public void userSingIn(String email, String password) {
         clickLoginButton().signIn(email, password);
-        return new MyAccountPage(driver);
     }
 }
