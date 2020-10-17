@@ -1,9 +1,12 @@
 package pages;
 
+import org.junit.rules.Timeout;
+import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.FluentWait;
 
+import java.time.Duration;
 import java.util.concurrent.TimeUnit;
 
 public class GenericPage {
@@ -17,8 +20,9 @@ public class GenericPage {
 
     public void fluentWaitForElementDisplayed(WebElement elementToBeDisplayed) {
         new FluentWait<>(elementToBeDisplayed)
-                .withTimeout(10, TimeUnit.SECONDS)
-                .pollingEvery(500, TimeUnit.MILLISECONDS)
+                .withTimeout(Duration.ofSeconds(10))
+                .pollingEvery(Duration.ofMillis(500))
+                .ignoring(NoSuchElementException.class)
                 .until(WebElement::isDisplayed);
     }
 
